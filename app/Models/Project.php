@@ -8,4 +8,14 @@ use Illuminate\Database\Eloquent\Model;
 class Project extends Model
 {
     use HasFactory;
+
+    public function manager()
+    {
+        return $this->belongsTo(User::class, 'manager_id');
+    }
+
+    public function tasks()
+    {
+        return $this->hasMany(Task::class);
+    }
 }

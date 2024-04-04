@@ -13,6 +13,12 @@ return new class extends Migration
     {
         Schema::create('tasks', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('project_id');
+            $table->string('description');
+            $table->enum('status', ['pending', 'in_progress', 'completed'])->default('pending');
+            $table->unsignedBigInteger('assigned_to');
+            $table->foreign('assigned_to')->references('id')->on('users')->onDelete('cascade');
+            $table->dateTime('deadline')->nullable();
             $table->timestamps();
         });
     }
